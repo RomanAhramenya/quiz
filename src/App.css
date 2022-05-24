@@ -29,9 +29,6 @@ body{
   border-radius:10px;
   transition: background-color 0.25s;
 }
-.active{
-  background-color:orangered
-}
 .Menu button:hover,.Game button:hover,.End button:hover{
   background-color:aqua
 }
