@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+import EndScreen from './component/EndScreen';
+import Game from './component/Game';
+import Menu from './component/Menu';
+import { QuizContext } from './helpers/QuizContext';
 
 function App() {
+  const [page,setPage] = useState('menu')
+  const [score,setScore] = useState(0)
+  const [player,setPlayer] = useState([])
+  const [value,setValue] = useState("")
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <QuizContext.Provider value={{
+      page,
+      setPage,
+      score,
+      setScore,
+      setPlayer,
+      player,
+      value,
+      setValue
+    }}>
+      {page === 'menu' && <Menu/>}
+      {page === 'game' && <Game/>}
+      {page === 'end' && <EndScreen/>}
+      <div className='Rezult'>
+      rezult:
+        {player.length > 0 && player.map(el=>{
+          return <div>
+            {el.name} = {el.score}
+          </div>
+        })}
+      </div>
+    </QuizContext.Provider>
+    
     </div>
   );
 }
